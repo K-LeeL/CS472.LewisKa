@@ -62,13 +62,13 @@
 
 // Function to generate an adjacency list graph with random edges
 template <class N>
-AdjListGraph<N> *generateAdjListGraph ( int numberOfNodes , double edgeProbability )
+AdjListGraph<N>* generateAdjListGraph ( int numberOfNodes , double edgeProbability )
 {
      // Seed the random number generator
      srand ( static_cast< unsigned >( time ( nullptr ) ) );
 
      // Create a new graph
-     AdjListGraph<N>*graph = new AdjListGraph<N> ( );
+     AdjListGraph<N>* graph = new AdjListGraph<N> ( );
 
      // Add the nodes to the graph
      for ( int i = 0; i < numberOfNodes; ++i )
@@ -99,14 +99,13 @@ AdjListGraph<N> *generateAdjListGraph ( int numberOfNodes , double edgeProbabili
 
 // Function to generate an adjacency matrix graph with random edges
 template <class N>
-AdjMatrixGraph<N> *generateAdjMatrixGraph ( int numberOfNodes , double edgeProbability )
+AdjMatrixGraph<N>* generateAdjMatrixGraph ( int numberOfNodes , double edgeProbability )
 {
      // Seed the random number generator
-
      srand ( static_cast< unsigned >( time ( nullptr ) ) );
 
      // Create a new graph
-     AdjMatrixGraph<N>*graph = new AdjMatrixGraph<N> ( );
+     AdjMatrixGraph<N>* graph = new AdjMatrixGraph<N> ( );
 
      // Add the nodes to the graph
      for ( int i = 0; i < numberOfNodes; ++i )
@@ -154,25 +153,42 @@ void measureDFSTime ( GraphType &graph , N startNode )
      const auto endTime = std::chrono::high_resolution_clock::now ( );
 
      // Calculate the execution time
-     auto ms = std::chrono::duration_cast< std::chrono::milliseconds >( endTime - startTime );
+     const auto ms = std::chrono::duration_cast< std::chrono::milliseconds >( endTime - startTime );
 
      // Print the execution time
      std::cout << "DFS time: " << ms.count ( ) << " ms" << std::endl;
 }
 
-int main()
+void testGraph ( int numberOfNodes , const double edgeProbability )
 {
-     constexpr int numberOfNodes = 8;
-     constexpr double edgeProbability = 0.5;
+     // Generate and measure DFS for an adjacency matrix graph
+     std::cout << "Testing graph with " << numberOfNodes << " nodes and edge probability of " << edgeProbability << std::endl;
 
      // Generate and measure DFS for an adjacency matrix graph
+     std::cout << "DFS on Adjacency Matrix Graph:" << std::endl;
      AdjMatrixGraph<int>* matrixGraph;
-     matrixGraph = generateAdjMatrixGraph<int>(numberOfNodes, edgeProbability);
+     matrixGraph = generateAdjMatrixGraph<int> ( numberOfNodes , edgeProbability );
      measureDFSTime ( matrixGraph , 0 );
 
      // Generate and measure DFS for an adjacency list graph
-     AdjListGraph<int>* listGraph = generateAdjListGraph<int>(numberOfNodes, edgeProbability);
+     std::cout << "DFS on Adjacency List Graph:" << std::endl;
+     AdjListGraph<int> *listGraph = generateAdjListGraph<int> ( numberOfNodes , edgeProbability );
      measureDFSTime ( listGraph , 0 );
+
+     std::cout << std::endl;
+}
+
+int main ( )
+{
+     const double edgeProbability = 0.5;
+     //Generate graphs with sizes of 2, 8, 64, 256, and 1024 nodes, each with a random number of edges, with edge probability of 0.5.
+
+     std::vector<int> sizes { 2, 8, 64, 256, 1024 };
+
+     for ( int s : sizes )
+     {
+          testGraph ( s , 0.5 );
+     }
 
      system ( "pause" );
 
