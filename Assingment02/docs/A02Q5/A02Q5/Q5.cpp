@@ -39,9 +39,6 @@
 #include <cmath>
 #include <random>
 
-#include <C:\Python\Python312\include\Python.h>
-#include "matplotlibcpp.h"
-
 // Function to generate a random data set
 void generateRandomDataSet ( std::vector<int> &dataSet , int size )
 {
@@ -141,27 +138,6 @@ int main ( )
           //  Output the data set size, average run time, and f(n) value
           std::cout << size << "\t\t" << averageRunTime <<  "\t\t\t" << fn << std::endl;
      }
-
-     //  Create a graph of data set size versus the average run time
-      matplotlibcpp::plot ( dataSetSizes , averageRunTimes , "o-" , "label='Average Run Time'" );
-
-     //  Create a graph of data set size versus f(n) = n * lg(n)
-      matplotlibcpp::plot ( dataSetSizes , fnvalues , "o-" , "label='f(n) = n * log(n)'" );
-
-     //  Set the x and y axis labels
-      matplotlibcpp::xlabel ( "Data Set Size" );
-
-     //  Set the x and y axis labels
-      matplotlibcpp::ylabel ( "Time (microseconds)" );
-
-     //  Set the title of the graph
-      matplotlibcpp::title ( "Data Set Size vs. Average Run Time" );
-
-     //  Display the legend
-      matplotlibcpp::legend ( );
-
-     //  Show the graph
-      matplotlibcpp::show ( );
 
      return 0;
 }
