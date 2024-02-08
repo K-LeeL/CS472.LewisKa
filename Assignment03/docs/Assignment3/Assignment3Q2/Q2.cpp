@@ -16,7 +16,7 @@
 #include <fstream>
 #include <vector>
 #include <utility>
-#include <algorithm>out
+#include <algorithm>
 
 // Using the standard template library pair class
 using Point = std::pair<int , int>;
