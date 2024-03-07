@@ -11,6 +11,8 @@
 # use a quarter, a nickel, and a nickel. However, if there are no nickels available,
 # the greedy approach would use a quarter and 5 pennies, which is not optimal.
 
+# https://www.geeksforgeeks.org/greedy-algorithm-to-find-minimum-number-of-coins/
+
 
 def make_change_greedy(amount, coins):
     # amount: the amount of change to make
