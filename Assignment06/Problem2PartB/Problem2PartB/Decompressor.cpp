@@ -112,6 +112,7 @@ void decompressFile ( const std::string &inputFile , const std::string &outputFi
      inFile.read ( reinterpret_cast< char * >( &totalEncodedChars ) , sizeof ( totalEncodedChars ) );
      inFile.read ( reinterpret_cast< char * >( &totalEncodedBytes ) , sizeof ( totalEncodedBytes ) );
      inFile.read ( reinterpret_cast< char * >( &originalChars ) , sizeof ( originalChars ) );
+     
 
      std::cout << "Total Chars: " << totalEncodedChars << std::endl;
      std::cout << "Encoding Size: " << totalEncodedBytes << std::endl;
@@ -154,11 +155,13 @@ void decompressFile ( const std::string &inputFile , const std::string &outputFi
                if ( currentNode->isLeaf ( ) )
                {
                     outFile.put ( currentNode->data );
-                    currentNode = root;
-                    ++decodedChars;
 
                     // Debugging: Print decoded character and current count
                     std::cout << "Decoded Character[" << decodedChars << "]: " << currentNode->data << std::endl;
+
+                    currentNode = root;
+                    ++decodedChars;
+
                }
           }
      }
